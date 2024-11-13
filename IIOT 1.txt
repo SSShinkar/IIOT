@@ -1,0 +1,34 @@
+1 Write a program for sending alert messages to the user for controlling and interacting with your environment.
+
+#include <DHT.h> //Include the DHT Library
+#define dhtpin 2
+#define dhttype DHT22
+#define buzzerPin 3 // Define the buzzer pin
+
+
+DHT dht(dhtpin, dhttype);
+
+void setup()
+{
+    Serial.begin(9600);
+    dht.begin();
+    pinMode(buzzerPin, OUTPUT); //Set buzzer pin as OUTPUT
+}
+
+void loop()
+{
+    float temperature = dht.readTemperature();
+    
+    if(temperature > 30)
+    {
+        sendAlert("Temperature Alert !!");
+        digitalWrite(buzzerPin, HIGH);
+        delay(2000);   //buzzer sound duration(1 second)
+        digitalWrite(buzzerPin, LOW);   //turn off the buzzer
+    }
+    delay(2000);
+}
+void sendAlert(String msg)
+{
+    Serial.prinln(msg);
+}

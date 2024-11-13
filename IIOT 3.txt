@@ -1,0 +1,32 @@
+3 Write a program for developing an IIOT application for energy monitoring and optimization
+
+const int ledPin = 5;     //LED CONNECTED TO DIGITAL PIN 5
+const int ldrPin = A0;    //LDR connected to analog pin A0(assuming A0 as an example)
+
+void setup()
+{
+    Serial.begin(9600);      // Start serial communication at 9600 baud rate
+    pinMode(ledPin, OUTPUT); // set ledPin as an OUTPUT
+    pinMode(ledPin, INPUT);  // set Idrpin as an INPUT
+
+}
+
+void loop()
+{
+    int ldrStatus = analogRead(ldrPin);   //Read the LDR Value
+    
+    if(ldrStatus <=320)    //If it's dark
+    {
+        digitalWrite(ledPin, HIGH);  //turn on the LED
+        Serial.print("Darkness over here, turn on LED.LDR VALUE :");
+        Serial.println(ldrStatus);
+    }
+    
+    else    // If there's sufficient light
+    {
+        digitalWrite(ledPin, LOW);  //Turn off the LED
+        Serial.print("There is sufficient light, turn off the LED. LDR Value:");
+        Serial.println(ldrStatus);
+    }
+    delay(1000);     //Wait for 1 second before the next loop
+}

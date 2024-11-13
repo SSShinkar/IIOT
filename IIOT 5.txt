@@ -1,0 +1,29 @@
+4 Write a program for implementing security measures in an 110T
+system
+
+const int buzzerPin = 5;    // Buzzer connected to digital pin 5
+const int flamePin = 2;     // Flame Sensor Connected to digital pin 2
+
+void setup()
+{
+   pinMode(buzzerPin, OUTPUT);     // Set buzzer pin as output
+   pinMode(flamePin, INPUT);       // Set flame sensor pin as input
+   Serial.begin(9600);             // Start Serial Communication
+}
+
+void loop()
+{
+    int flame = digitalRead(flamePin);     //Read the flame sensor value
+    
+    if (flame == LOW)
+    {
+        Serial.println("Fire is Detected");
+        digitalWrite(buzzerPin,HIGH);    // Turn on the buzzer
+    }
+    else
+    {
+        Serial.println("No fire is detected");
+        digitalWrite(buzzerPin,LOW);     // Turn off the buzzer
+    }
+    delay(1000);   //Wait for 1 second before the next loop iteration
+}
